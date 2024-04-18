@@ -9,7 +9,7 @@ def index(request):
         requestJSON = {}
         requestJSON["action"] = "loginUser"
         requestJSON["email"] = email
-        requestJSON["passw"] = passw
+        requestJSON["passw"] = hashlib.md5(hashlib.md5(passw.encode("utf-8")).hexdigest().encode("utf-8")).hexdigest()
         print(requestJSON)
         r = requests.post("http://127.0.0.1:8000/login/", data = json.dumps(requestJSON), headers={"Contect-Type":"application/json"})
         print(r)
